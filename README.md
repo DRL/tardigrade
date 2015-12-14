@@ -21,7 +21,6 @@ blastn -task megablast -query georgios_assembly/nHd.2.3.abv500.fna -db silva/SIL
 
 # run kallisto quant
 /exports/software/kallisto/kallisto_linux-v0.42.4/kallisto quant -i tg.cds.fna.idx -o quant_10BS -b 10 -t 64 Tardi_RNASeq_ATCACG_L007_R1_001.fastq.gz Tardi_RNASeq_ATCACG_L007_R2_001.fastq.gz
-
 /exports/software/kallisto/kallisto_linux-v0.42.4/kallisto quant -i nHd.2.3.1.aug.transcripts.UC.idx -o quant_10BS -b 10 -t 64 Tardi_RNASeq_ATCACG_L007_R1_001.fastq.gz Tardi_RNASeq_ATCACG_L007_R2_001.fastq.gz 
 ```
 
@@ -67,11 +66,8 @@ perl -ne 'chomp; @temp = split("\t"); if ($temp[1] > 100){print $temp[0].",>100 
 ```
 # create
 /exports/software/blobtools/blobtools create -i nHd.2.3.abv500.fna -c nHd_Lib350.sam.cov -t ../blast/nHd.2.3.abv500.vs.uniref90.dmnd.out -t nHd.2.3.abv500.vs.nt.10cul2.1e25.megablast.out -o nHd.2.3.nHd_lib350-cov -x bestsumorder -x bestsum
-
 /exports/software/blobtools/blobtools create -i tg.genome.fsa -c TG-300.vs.tg.genome.bam.cov -c TG-500.vs.tg.genome.bam.cov -c TG-800.vs.tg.genome.bam.cov -t tg.genome.fsa.vs.uniref90.dmnd.out -t tg.genome.fsa.vs.nt.megablast.out -o unc.TG-cov -x bestsumorder -x bestsum
-
 /exports/software/blobtools/blobtools create -i assembly/tg.genome.fsa -c unc.Hd_Lib350.sam.cov -t tg.genome.fsa.vs.uniref90.dmnd.out -t tg.genome.fsa.vs.nt.megablast.out -o unc.nHd-cov -x bestsum -x bestsumorder
-
 /exports/software/blobtools/blobtools create -i nHd.1.0.contigs.cov.fna -y velvet -o nHd.1.0 -t nHd.1.0.abv500.vs.uniref90.dmnd.daa.out -t nHd.1.0.vs.nt.10cul2.1e25.megablast.out -x bestsum -x bestsumorder
 
 # plot 
