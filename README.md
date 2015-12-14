@@ -1,7 +1,7 @@
 # tardigrade
 Scripts and relevant processed data files for Boothby et al 2015 and Koutsovoulos et al 2015 tardigrade genome papers
 
-## rDNA screening using SILVA
+## rDNA screening using SILVA (silva)
 ```
 blastn -task megablast -query assembly/tg.genome.fsa -db silva/SILVA_123_SSUParc_tax_silva.rDNA.fasta -outfmt '6 qseqid std sscinames sskingdoms stitle' -num_threads 48 -evalue 1e-65 -out silva/unc.vs.SSUParc.1e65.megablast.out 
 blastn -task megablast -query assembly/tg.genome.fsa -db silva/SILVA_123_LSUParc_tax_silva.rDNA.fasta -outfmt '6 qseqid std sscinames sskingdoms stitle' -num_threads 48 -evalue 1e-65 -out silva/unc.vs.LSUPARC.1e65.megablast.out  
@@ -10,7 +10,7 @@ blastn -task megablast -query georgios_assembly/nHd.2.3.abv500.fna -db silva/SIL
 blastn -task megablast -query georgios_assembly/nHd.2.3.abv500.fna -db silva/SILVA_123_LSUParc_tax_silva.rDNA.fasta -outfmt '6 qseqid std sscinames sskingdoms stitle' -num_threads 48 -evalue 1e-65 -out silva/nHd.vs.LSUPARC.1e65.megablast.out
 ````
 
-## calculate TPM for CDS from both assemblies
+## calculate TPM for CDS from both assemblies (expression)
 ```
 # get CDS for UNC
 /exports/software/cufflinks/cufflinks-2.2.1.Linux_x86_64/gffread ../gff/tg.default.final.gff -g tg.genome.fsa -x tg.cds.fna 
@@ -24,7 +24,7 @@ blastn -task megablast -query georgios_assembly/nHd.2.3.abv500.fna -db silva/SIL
 /exports/software/kallisto/kallisto_linux-v0.42.4/kallisto quant -i nHd.2.3.1.aug.transcripts.UC.idx -o quant_10BS -b 10 -t 64 Tardi_RNASeq_ATCACG_L007_R1_001.fastq.gz Tardi_RNASeq_ATCACG_L007_R2_001.fastq.gz 
 ```
 
-## get RNAseq average basecov
+## get RNAseq average basecov (rnaseq_mapping)
 ```
 # build index
 /exports/software/gsnap/gmap-2015-11-20/bin/bin/gmap_build --dir . -d tg.genome.fsa -k 16 tg.genome.fsa
@@ -60,7 +60,7 @@ perl -ne 'chomp; @temp = split("\t"); if ($temp[1] > 100){print $temp[0].",>100 
 perl -ne 'chomp; @temp = split("\t"); if ($temp[1] > 100){print $temp[0].",>100 RNAseq basecov\n"}elsif($temp[1] >= 10 && $temp[1] < 99){print $temp[0].",10-99 RNAseq basecov\n"}elsif($temp[1] >= 1 && $temp[1] < 9){print $temp[0].",1-9 RNAseq basecov\n"}else{print $temp[0].",0 RNAseq basecov\n"}' tardi_RNASeq.vs.nHd.2.3.bam.reads_per_contig.norm_rnaseq_depth.name.basecov.txt > tardi_RNASeq.vs.nHd.2.3.bam.reads_cov.catcolour.txt
 ````
 
-## Make blobplots
+## make blobplots (blobs)
 ```
 # create
 /exports/software/blobtools/blobtools create -i nHd.2.3.abv500.fna -c nHd_Lib350.sam.cov -t ../blast/nHd.2.3.abv500.vs.uniref90.dmnd.out -t nHd.2.3.abv500.vs.nt.10cul2.1e25.megablast.out -o nHd.2.3.nHd_lib350-cov -x bestsumorder -x bestsum
