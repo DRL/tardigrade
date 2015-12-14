@@ -57,8 +57,6 @@ cut -f1,4 tardi_RNASeq.vs.nHd.2.3.bam.reads_per_contig.norm_rnaseq_depth.tsv > t
 
 # write cat colour file
 perl -ne 'chomp; @temp = split("\t"); if ($temp[1] > 100){print $temp[0].",>100 RNAseq basecov\n"}elsif($temp[1] >= 10 && $temp[1] < 99){print $temp[0].",10-99 RNAseq basecov\n"}elsif($temp[1] >= 1 && $temp[1] < 9){print $temp[0].",1-9 RNAseq basecov\n"}else{print $temp[0].",0 RNAseq basecov\n"}' tardi_RNASeq.vs.unc.bam.reads_per_contig.norm_rnaseq_depth.name.basecov.txt > tardi_RNASeq.vs.unc.bam.reads_cov.catcolour.txt
-~/git/blobtools/blobtools plot -i unc.TG-cov.BlobDB.json --catcolour tardi_RNASeq.vs.unc.bam.reads_cov.catcolour.txt
-
 perl -ne 'chomp; @temp = split("\t"); if ($temp[1] > 100){print $temp[0].",>100 RNAseq basecov\n"}elsif($temp[1] >= 10 && $temp[1] < 99){print $temp[0].",10-99 RNAseq basecov\n"}elsif($temp[1] >= 1 && $temp[1] < 9){print $temp[0].",1-9 RNAseq basecov\n"}else{print $temp[0].",0 RNAseq basecov\n"}' tardi_RNASeq.vs.nHd.2.3.bam.reads_per_contig.norm_rnaseq_depth.name.basecov.txt > tardi_RNASeq.vs.nHd.2.3.bam.reads_cov.catcolour.txt
 ````
 
